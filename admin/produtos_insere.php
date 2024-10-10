@@ -1,7 +1,39 @@
-<!-- CONECTAR COM O BANCO E SELECIONAR AS INFORMAÇÕES -->
+<?php
+include 'acesso_com.php';
+include '../conn/connect.php';
+if($_POST){
+    if(isset($_POST['enviar'])){
+        $nome_img = $_FILES['imagemfile']['name'];
+        $tmp_img = $_FILES['imagemfile']['tmp_name'];
+        $rand = rand(100001,999999);
+        $dir_img = "../images".$rand.$nome_img;
+        move_uploaded_file($tmp_img,$dir_img);
+    }
 
+    $id = $_POST['id_tipo'];
+    $destaque = $_POST['destaque'];
+    $descricao = $_POST['descricao'];
+    $resumo = $_POST['resumo'];
+    $valor = $_POST['valor'];
+    $imagem = $rand.$nome_img;
+
+    $insereProduto = "insert produtos
+    (tipo_id, descricao, valor, imagem, destaque) values
+    ($id, '$descricao', '$resumo', $valor, '$imagem', '$destaque')";
+    $resultado = $conn->query($insereProduto);
+    if(mysqli_insert_id($conn)){
+        header('location:produtos_lista.php');
+    }
+}
+//selecionar a lista de tipos para preencher o <select>
+$listaTipo = $conn->query("select * from tipos order by rotulo");
+$rowTipo = $listaTipo->fetch_assoc();
+$numLinhas = $listaTipo->num_rows;
 
 ?>
+
+
+<!-- CONECTAR COM O BANCO E SELECIONAR AS INFORMAÇÕES -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>

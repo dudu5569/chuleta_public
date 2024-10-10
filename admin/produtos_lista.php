@@ -1,6 +1,12 @@
+<?php
+include 'acesso_com.php';
+include '../conn/connect.php';
+$lista = $conn->query("select * from produtos");
+$row = $lista->fetch_assoc();
+$rows = $lista->num_rows;
+?>
+
 <!-- CONECTAR NO BANCO E SELECIONAR AS INFORMAÇÕES -->
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -32,18 +38,27 @@
             
             <tbody> <!-- início corpo da tabela -->
            	        <!-- início estrutura repetição -->
+                    <?php do{ ?>
                 <!-- COMEÇO DO LAÇO -->
                     <tr>
                         <td class="hidden">
-                            <!-- ID -->
+                            <?php echo $row['id']; ?>
                         </td>
                         <td>
-                            <!-- RÓTULO -->
+                            <?php echo $row['rotulo']; ?>
                             <span class="visible-xs"></span>
                             <span class="hidden-xs"></span>
                         </td>
                         <td>
-                            <!-- INFORMAÇÃO -->
+                            <?php
+                            if ($row['destaque']=='Sim'){
+                                echo '<span class=""glyphicon glyphicon-star text-danger" aria-hidden="true"></span>';
+                            }else{
+                                echo '<span class="glyphicon glyphicon-ok text-sucess" aria-hidden="true"></span>';
+                            }
+                            echo '&nbsp';
+                            echo $row['descricao'];
+                            ?>
                         </td>
                         <td>
                             <?php echo $row['resumo']; ?>
@@ -82,7 +97,7 @@
                             </button>
                         </td>
                     </tr>    
-                <!-- FIM DO LAÇO -->  
+               <?php } while ($row = $lista->fetch_assoc()); ?>
             </tbody><!-- final corpo da tabela -->
         </table>
     </main>

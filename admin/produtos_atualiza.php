@@ -1,6 +1,51 @@
-<!-- CONECTAR COM O BANCO E SELECIONAR AS INFORMAÇÕES -->
+<?php
+include 'acesso_ocm.php';
+include '../conn/connect.php';
+if($_POST){ //se o usuarui clicou no botao de atualizar
+    if($_FILES['imagefile']['name']){//se o usuario escolher uma imagem
+        unlink("../images/".$_POST['imagem_atual']); //apaga a imagem do servidor de arquivos
+        $nome_img = $_FILES['imagefile']['name'];
+        $tmp_img = $_FILES['imagemfile']['tmp_name'];
+        $rand = rand(100001,999999); //gera um numero aleatorio para a imagem
+        $dir_img = "../images/".$rand.$nome_img;
+        move_uploaded_file($tmp_img,$dir_img);
+        $nome_img = $rand.$nome_img;
+    } else{
+        $nome_img = $_POST['imagem_atual'];
+    }
+    $id = $_POST['id'];
+    $id_tipo = $_POST['id_tipo'];
+    $destaque = $_POST['destaque'];
+    $descricao = $_POST['descricao'];
+    $resumo = $_POST['resumo'];
+    $valor = $_POST['valor'];
+
+    $update = "update produtos
+    set tipo_id = '$id_tipo',
+    destaque = '$destaque',
+    descricao = '$descricao',
+    resumo = '$resumo',
+    valor = '$valor',
+    imagem = '$nome_img'
+    where id = '$id';";
+    //print_r($update)
+    $resultado = $conn->query($update);
+    if($resultado){
+        header('location:produtos_lista.php');
+    }
+}
+if($_GET){
+    $id_form = $_GET['id'];
+}else{
+    $id_form = 0;
+}
+
+$lista = $conn->query("select * from tipos order by rotulo");
+$rowTipo = $listaTipo->fetch_assoc();
+$numLinhas = $listaTipo->num_rows;
 
 ?>
+<!-- CONECTAR COM O BANCO E SELECIONAR AS INFORMAÇÕES -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
