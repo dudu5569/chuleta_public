@@ -1,23 +1,28 @@
+<!-- CONECTAR COM O BANCO E SELECIONAR AS INFORMAÇÕES -->
 <?php
 include '../conn/connect.php';
-//inicia a verficação do login
+//inicia a verificação do login
+ 
 if($_POST){
     $login = $_POST['login'];
     $senha = md5($_POST['senha']);
     $loginRes = $conn->query("select * from usuarios where login = '$login' and senha = '$senha'");
     $rowLogin = $loginRes->fetch_assoc();
     $numRow = $loginRes->num_rows;
-    //se a sessão não existir
+    // se a sessão não existir
     if(!isset($_SESSION)){
-        $sessaoAntiga = session_name('chuletaaa');
+        $sessaoAntiga = session_name('chulettaaa');
         session_start();
         $session_name_new = session_name();
     }
     if($numRow>0){
         $_SESSION['login_usuario'] = $login;
-        $_SESSION['nivel_usuario'] = $rowLogin['nivel'];
+        $_SESSION['nivel usuario'] = $rowLogin['nivel'];
         $_SESSION['nome_da_sessao'] = session_name();
-        if ($rowLogin['nivel'] =='sup'){
+        if($rowLogin['nivel']=='sup'){
+            echo "<script>window.open('index.php','_self')</script>";
+        }
+        else{
             echo "<script>window.open('../cliente/index.php?cliente=".$login."','_self')</script>";
         }
     }
@@ -26,11 +31,10 @@ if($_POST){
     }
 }
 ?>
-<!-- CONECTAR COM O BANCO E SELECIONAR AS INFORMAÇÕES -->
-
+ 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="refresh" content="30;URL=../index.php">
@@ -39,10 +43,10 @@ if($_POST){
     <script src="https://kit.fontawesome.com/2495680ceb.js" crossorigin="anonymous"></script>
     <!-- Link para CSS específico -->
     <link rel="stylesheet" href="../css/estilo.css" type="text/css">
-    
+   
     <title>Chuleta Quente - Login</title>
 </head>
-
+ 
 <body>
     <main class="container">
         <section>
@@ -88,11 +92,11 @@ if($_POST){
             </article>
         </section>
     </main>
-
-
+ 
+ 
     <!-- Link arquivos Bootstrap js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
 </body>
-
+ 
 </html>

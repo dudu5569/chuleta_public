@@ -80,7 +80,7 @@ $rows = $lista->num_rows;
                             </a>
                                 <!-- não mostrar o botão excluir se o produto estiver em destaque -->
                                 <?php  
-                                    $regra = $conn->query("select destaque from vw_produtos where id =".$row['id']);
+                                    $regra = $conn->query("select destaque from produtos where id =".$row['id']);
                                     $regraRow = $regra->fetch_assoc();
                                 ?>
 
