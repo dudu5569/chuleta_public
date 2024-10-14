@@ -1,6 +1,6 @@
 <?php
 include "conn/connect.php";
-$lista = $conn->query('Select * from produtos');
+$lista = $conn->query('Select * from vw_produtos');
 $row_produtos = $lista->fetch_assoc();
 $num_linhas = $lista->num_rows;     
 ?>

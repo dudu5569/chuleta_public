@@ -12,7 +12,7 @@ $rows = $lista->num_rows;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos - Lista</title>
+    <title>Tipos - Lista</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/estilo.css">
 </head>
@@ -25,7 +25,7 @@ $rows = $lista->num_rows;
                 <th class="hidden">ID</th>
                 <th>TIPO</th>
                 <th>SIGLA</th>
-                    <a href="produtos_insere.php" target="_self" class="btn btn-block btn-primary btn-xs" role="button">
+                    <a href="tipos_insere.php" target="_self" class="btn btn-block btn-primary btn-xs" role="button">
                         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                         <span class="hidden-xs">ADICIONAR</span>
                     </a>
@@ -116,7 +116,7 @@ $rows = $lista->num_rows;
         var id = $(this).data('id'); // busca o id (data-id)
         //console.log(id + ' - ' + nome); //exibe no console
         $('span.nome').text(nome); // insere o nome do item na confirmação
-        $('a.delete-yes').attr('href','produtos_excluir.php?id='+id); //chama o arquivo php para excluir o produto
+        $('a.delete-yes').attr('href','tipos_excluir.php?id='+id); //chama o arquivo php para excluir o produto
         $('#modalEdit').modal('show'); // chamar o modal
     });
 </script>
