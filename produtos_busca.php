@@ -1,5 +1,5 @@
 <?php
-include "conn/conexao.php";
+include "conn/connect.php";
 $busca = $_GET['buscar'];
 $listaBusca = $conn->query("select * from vw_produtos where descricao like '%$busca%' or resumo like '%$busca%' order by descricao asc");
 $rowBusca = $listaBusca->fetch_assoc();

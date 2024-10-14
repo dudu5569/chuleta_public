@@ -1,5 +1,5 @@
 <?php
-session_name('chuletaaa');
+session_name('chulettaaa');
 session_start();
 session_destroy();
 header('location:../index.php');
