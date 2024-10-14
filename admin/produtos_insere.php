@@ -1,4 +1,4 @@
-<?php
+<?php 
 include 'acesso_com.php';
 include '../conn/connect.php';
 if($_POST){
@@ -6,7 +6,7 @@ if($_POST){
         $nome_img = $_FILES['imagemfile']['name'];
         $tmp_img = $_FILES['imagemfile']['tmp_name'];
         $rand = rand(100001,999999);
-        $dir_img = "../images".$rand.$nome_img;
+        $dir_img = "../images/".$rand.$nome_img;
         move_uploaded_file($tmp_img,$dir_img);
     }
 
@@ -15,25 +15,25 @@ if($_POST){
     $descricao = $_POST['descricao'];
     $resumo = $_POST['resumo'];
     $valor = $_POST['valor'];
-    $imagem = $rand.$nome_img;
-
-    $insereProduto = "INSERT INTO produtos
-    (tipo_id, descricao, valor, imagem, destaque) VALUES
-    ($id, '$descricao', '$resumo', $valor, '$imagem', '$destaque')";
-    $resultado = $conn->query($insereProduto);
+    $imagem =  $rand.$nome_img;
+    
+    $insereProduto = "insert produtos 
+                    (tipo_id, descricao, resumo, valor, imagem, destaque)
+                    values
+                    ($id,'$descricao', '$resumo', $valor, '$imagem', '$destaque') 
+                    ";
+    $resultado = $conn->query($insereProduto);            
     if(mysqli_insert_id($conn)){
         header('location:produtos_lista.php');
     }
 }
-//selecionar a lista de tipos para preencher o <select>
-$listaTipo = $conn->query("select * from tipos");
+// selecionar a lista de tipos para preencher o <select>
+$listaTipo = $conn->query("select * from tipos order by rotulo");
 $rowTipo = $listaTipo->fetch_assoc();
 $numLinhas = $listaTipo->num_rows;
 
 ?>
 
-
-<!-- CONECTAR COM O BANCO E SELECIONAR AS INFORMAÇÕES -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -68,12 +68,13 @@ $numLinhas = $listaTipo->num_rows;
                             </span>
                             <select name="id_tipo" id="id_tipo" class="form-control" required>
                                 <?php do{ ?>
-                                    <option value="<?php $rowTipo['id'] ?>">
-                                    <?php echo $rowTipo['sigla'] ?></option>
-                                    <?php }while ($rowTipo = $listaTipo->fetch_assoc()); ?>
-                                </select>
-                            </div>
-                            <label for="destaque">Destaque:</label>
+                                    <option value="<?php echo $rowTipo['id']; ?>">
+                                    <?php echo $rowTipo['rotulo']; ?>
+                                    </option>
+                                <?php }while($rowTipo = $listaTipo->fetch_assoc()); ?>
+                            </select>
+                        </div>
+                        <label for="destaque">Destaque:</label>
                         <div class="input-group">
                             <label for="destaque_s" class="radio-inline">
                                 <input type="radio" name="destaque" id="destaque" value="Sim">Sim
@@ -82,44 +83,44 @@ $numLinhas = $listaTipo->num_rows;
                                 <input type="radio" name="destaque" id="destaque" value="Não" checked>Não
                             </label>
                         </div>
-                        <label for="descricao">Descrição:</label>     
+                            <label for="descricao">Descrição:</label>     
                         <div class="input-group">
-                            <span class="input-group-addon">
+                           <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
-                            </span>
-                            <input type="text" name="descricao" id="descricao" 
-                            class="form-control" placeholder="Digite a descrição do Produto"
-                            maxlength="100" required>
+                           </span>
+                           <input type="text" name="descricao" id="descricao" 
+                                class="form-control" placeholder="Digite a descrição do Produto"
+                                maxlength="100" required>
                         </div>   
                         
                         <label for="resumo">Resumo:</label>     
                         <div class="input-group">
-                            <span class="input-group-addon">
+                           <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-                            </span>
-                            <textarea  name="resumo" id="resumo"
-                            cols="30" rows="8"
-                            class="form-control" placeholder="Digite os detalhes do Produto"
-                            required></textarea>
+                           </span>
+                           <textarea  name="resumo" id="resumo"
+                                cols="30" rows="8"
+                                class="form-control" placeholder="Digite os detalhes do Produto"
+                                required></textarea>
                         </div> 
                         
                         <label for="valor">Valor:</label>     
                         <div class="input-group">
-                            <span class="input-group-addon">
+                           <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>
-                            </span>
-                            <input type="number" name="valor" id="valor" 
-                            class="form-control" required min="0" step="0.01">
+                           </span>
+                           <input type="number" name="valor" id="valor" 
+                                class="form-control" required min="0" step="0.01">
                         </div>   
                         <label for="imagem">Imagem:</label>    
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
-                            </span>
-                            <img src="" name="imagem" id="imagem" class="img-responsive">
-                            <input type="file" name="imagemfile" id="imagemfile" class="form-control" accept="image/*">
+                           </span>
+                           <img src="" name="imagem" id="imagem" class="img-responsive">
+                           <input type="file" name="imagemfile" id="imagemfile" class="form-control" accept="image/*">
                         </div>
-                        
+
                         <br>
                         <input type="submit" name="enviar" id="enviar" class="btn btn-danger btn-block" value="Cadastrar">
                     </form>
