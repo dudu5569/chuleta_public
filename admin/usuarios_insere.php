@@ -33,16 +33,16 @@ if ($_POST){
 <main class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-offset-2 col-sm-6  col-md-8">
-            <h2 class="breadcrumb text-danger">
-                <a href="produtos_lista.php">
-                    <button class="btn btn-danger">
+            <h2 class="breadcrumb text-info">
+                <a href="usuarios_lista.php">
+                    <button class="btn btn-info">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </button>
                 </a>
                 Inserindo Usuários
             </h2>
             <div class="thumbnail">
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-info" role="alert">
                     <form action="usuarios_insere.php" method="post" 
                     name="form_insere" enctype="multipart/form-data"
                     id="form_insere">
@@ -76,7 +76,7 @@ if ($_POST){
                         
 
                         <br>
-                        <input type="submit" name="enviar" id="enviar" class="btn btn-danger btn-block" value="Cadastrar">
+                        <input type="submit" name="enviar" id="enviar" class="btn btn-info btn-block" value="Cadastrar">
                     </form>
                 </div>
             </div>

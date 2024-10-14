@@ -19,7 +19,7 @@ $rows = $lista->num_rows;
 <body class=""> 
     <?php include 'menu_adm.php'; ?>
     <main class="container">
-        <h2 class="breadcrumb alert-danger">Lista de Usuários</h2>
+        <h2 class="breadcrumb alert-info">Lista de Usuários</h2>
         <table class="table table-hover table-condensed tb-opacidade bg-warning"> 
             <thead>
                 <th class="hidden">ID</th>
