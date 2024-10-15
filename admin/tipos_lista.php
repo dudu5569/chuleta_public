@@ -52,14 +52,6 @@ $rows = $lista->num_rows;
                             ?>
                         </td>
                         <td>
-                            <a
-                                href="produtos_atualiza.php?id=<?php echo $row['id'] ?>" 
-                                role="button" 
-                                class="btn btn-warning btn-block btn-xs"
-                            >
-                                <span class="glyphicon glyphicon-refresh"></span>
-                                <span class="hidden-xs">ALTERAR</span>    
-                            </a>
                                 <!-- não mostrar o botão excluir se o produto estiver em destaque -->
                                 <?php  
                                     $regra = $conn->query("select destaque from produtos where id =".$row['id']);
